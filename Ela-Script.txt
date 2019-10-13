@@ -1,0 +1,159 @@
+ //----------------------------------------------------------------
+ // PRESS CTRL R TO RENAME WOW'S IF YOU LAUNCH THEM MANUALLY. 
+ //----------------------------------------------------------------
+<Hotkey ScrollLockOn Ctrl R>
+<If WinSizeIs "World of Warcraft" 470 265>
+  <SendWinM "World of Warcraft">
+  <RenameWin "World of Warcraft" HiddenDialogBox>
+<Else>
+  <RenameWin "World of Warcraft" WoW1>
+  <RenameWin "World of Warcraft" WoW2>
+  <RenameWin "World of Warcraft" WoW3>
+  <RenameWin "World of Warcraft" WoW4>
+  <RenameWin "World of Warcraft" WoW5> 
+
+ //----------------------------------------------------------------
+ // PiP Config (3440 x 1440 SCREEN)
+ //----------------------------------------------------------------
+<Command ResizeAndPosition>
+  <TargetWin %5%>
+    <SetWinSize 600 270>
+    <SetWinPos 2800 910>
+  <TargetWin %4%>
+    <SetWinSize 600 270>
+    <SetWinPos 2800 640>
+  <TargetWin %3%>
+    <SetWinSize 600 270>
+    <SetWinPos 2800 370>
+  <TargetWin %2%>
+    <SetWinSize 600 270>
+    <SetWinPos 2800 100>
+  <TargetWin %1%>
+    <SetWinPos 0 0>
+    <SetWinSize 3440 1440>
+  <TargetWin %5%>
+    <SetForegroundWin>
+    <UpdateWin>
+  <TargetWin %4%>
+    <SetForegroundWin>
+    <UpdateWin>
+  <TargetWin %3%>
+    <SetForegroundWin>
+    <UpdateWin>
+  <TargetWin %2%>
+    <SetForegroundWin>
+    <UpdateWin>
+  <TargetWin %1%>
+    <SetWinRegion 2800 100 600 270>
+    <SetWinRegion 2800 370 600 270>
+    <SetWinRegion 2800 640 600 270>
+    <SetWinRegion 2800 910 600 270>
+    <SetForegroundWin>
+
+ //----------------------------------------------------------------
+ // Window Switching  (F1 F2 F3 F4) 
+ //----------------------------------------------------------------
+<Hotkey ScrollLockOn F1>
+   <ResizeAndPosition WoW1 WoW2 WoW3 WoW4 WoW5>
+<Hotkey ScrollLockOn F2>
+   <ResizeAndPosition WoW2 WoW1 WoW3 WoW4 WoW5>
+<Hotkey ScrollLockOn F3>
+   <ResizeAndPosition WoW3 WoW2 WoW1 WoW4 WoW5>
+<Hotkey ScrollLockOn F4>
+   <ResizeAndPosition WoW4 WoW2 WoW3 WoW1 WoW5>
+<Hotkey ScrollLockOn F5>
+   <ResizeAndPosition WoW5 WoW2 WoW3 WoW4 WoW1>
+
+ //----------------------------------------------------------------
+ // SUBROUTINE TO LAUNCH AND RENAME A COPY OF WOW.
+ //----------------------------------------------------------------
+<Command LaunchAndRename>
+  <SendPC %1%>
+    <Run "E:\Classic\World of Warcraft\_classic_\Wow.exe">
+    <wait 1500>
+    <RenameWin "World of Warcraft" PreDummyBox>
+    <RenameWin "World of Warcraft" %2%>
+
+ //----------------------------------------------------------------
+ // HOTKEY TO LAUNCH AND RENAME ALL WWW WINDOWS.
+ //----------------------------------------------------------------
+<Hotkey ScrollLockOn Alt Ctrl L>
+  <LaunchAndRename Local WoW1>
+  <RemoveWinFrame>
+  <LaunchAndRename Local WoW2>
+  <RemoveWinFrame>
+  <LaunchAndRename Local WoW3>
+  <RemoveWinFrame>
+  <LaunchAndRename Local WoW4>
+  <RemoveWinFrame>
+  <LaunchAndRename Local WoW5>
+  <RemoveWinFrame>
+
+ //----------------------------------------------------------------
+ // DEFINE MAIL LABELS FOR SENDING KEY STROKES. 
+ //----------------------------------------------------------------
+<Label w1 Local SendWinM WoW1>
+<Label w2 Local SendWinM WoW2>
+<Label w3 Local SendWinM WoW3>
+<Label w4 Local SendWinM WoW4>
+<Label w5 Local SendWinM WoW5>
+
+ //----------------------------------------------------------------
+ // DEFINE A KEYLIST CALLED MYLIST INSTEAD OF USING HOTKEYS
+ // F1-F6 HAS BEEN DELETED FROM THE LIST SINCE IT'S ALREADY DEFINED.
+ // Q, E AND X HAVE BEEN ADDED TO THE EXCLUDE
+ //----------------------------------------------------------------
+<KeyList MyList A-Z, 0-9, Period, Comma, Oem1, Oem2, NumPad0-Numpad9, NumPadEnter, F7-F12, Esc except W, A, S, D, J, Q, E, X>
+<KeyList MyList2 A-Z, 0-9, Plus, Minus, F1-F12, NumLock, except W, A, S, D, f1, E, Q>
+  <Hotkey ScrollLockOn MyList; ScrollLockOn Shift MyList2>
+  <SendLabel w1, w2, w3, w4, w5>
+  <Key %Trigger%>
+
+
+ //----------------------------------------------------------------
+ // DEFINE MOVEMENT KEYS THAT WILL GET SENT TO ALL WOW'S.
+ //----------------------------------------------------------------
+<KeyList MoveSet up, down, left, right, X, Space>
+<MovementHotkey ScrollLockOn MoveSet>
+<SendLabel w1, w2, w3, w4, w5> 
+<Key %Trigger%>
+// SPACE AND X ADDED TO THE MOVEMENT KEYS. ADD Q AND E IF YOU WANT THOSE KEYS TO PASS TO SLAVES FOR STRAFING.
+
+
+ //----------------------------------------------------------------
+ // MOUSECLICK TESTGROUND
+ //----------------------------------------------------------------
+ //<Hotkey ScrollLockOn Alt R, F, V, LButton, MButton, RButton, Button4, Button5>
+ //   <SendLabel w1, w2, w3, w4, w5>
+ //     <ClickMouse NoClick>
+ //       <Key %Trigger%>
+ //      <ClickMouse %TriggerMainKey%>
+ //        <RestoreMousePos>
+ //----------------------------------------------------------------
+
+ //----------------------------------------------------------------
+ // AOE, SOMETIMES IT WORKS, TRY CLICK ON "EMPTY" GROUND FOR BETTER RESULT
+ //----------------------------------------------------------------
+<Hotkey ScrollLockOn Alt F, LButton>
+  <SendLabel w3, w4, w5>
+  <Key %Trigger%>
+  <ClickMouse LButton>
+  <RestoreMousePos>
+
+ //----------------------------------------------------------------
+ // TOGGLE HKN MUTE
+ // PAUSE TO TOGGLE BROADCASTING ON AND OFF WHEN TYPING IN THE CHAT WINDOW
+ // OR ANYTIME YOU DON'T WANT EVERYONE RESPONDING TO KEYSTROKES.
+ //----------------------------------------------------------------
+<hotkey Pause>
+  <sendpc local>
+  <ToggleHotkeys>
+
+ //----------------------------------------------------------------
+ // BROADCAST MOUSE CLICKS. HOLD DOWN OEM5 WHEN YOU WANT TO BROADCAST.
+ //----------------------------------------------------------------
+<UseKeyAsModifier Oem5>
+<Hotkey ScrollLockOn Oem5 LButton, MButton, RButton, Button4, Button5>
+   <SendLabel w2, w3, w4, w5>
+      <ClickMouse %TriggerMainKey%>
+        <RestoreMousePos>
